@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Big Match — Parcours UX</title>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=cabinet-grotesk@400,500,700,800&display=swap" rel="stylesheet">
+<style>
+:root { 
+  --blue: #082DAA;
+  --blue-light: #1a45cc;
+  --blue-dim: rgba(8,45,170,0.15);
+  --red: #F7041D;
+  --red-dim: rgba(247,4,29,0.12);
+  --white: #F8F8F9;
+  --gray: #A2A2A2;
+  --gray-mid: #7E7E7E;
+  --dark: #101919;
+  --dark-2: #181f1f;
+  --dark-3: #1e2828;
+  --dark-4: #242f2f;
+  --border: rgba(255,255,255,0.07);
+  --text: #e8eaed;
+  --text-muted: #8a9090;
+  --text-faint: #4a5555;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --font-display: "Cabinet Grotesk", sans-serif;
+  --font-body: "Satoshi", sans-serif;
+  --transition: 200ms cubic-bezier(0.16,1,0.3,1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-body);
+  background: var(--dark);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: var(--dark-4); border-radius: 3px; }
+
+/* HEADER */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(16,25,25,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px;
+}
+.header-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-display); font-weight: 800; font-size: 18px;
+  letter-spacing: -0.02em; color: var(--white);
+  text-decoration: none;
+}
+.header-logo .dot { color: var(--red); }
+.header-badge {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--text-muted);
+  background: var(--dark-3); padding: 4px 10px; border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+/* HERO */
+.hero {
+  padding: 80px 32px 60px;
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center;
+}
+.hero-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--red);
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(2.2rem, 4vw, 3.4rem); line-height: 1.08;
+  letter-spacing: -0.03em; color: var(--white);
+  margin-bottom: 18px;
+}
+.hero h1 em { color: var(--blue-light); font-style: normal; }
+.hero-desc { font-size: 15px; color: var(--text-muted); max-width: 480px; line-height: 1.7; }
+.hero-stats {
+  display: flex; flex-direction: column; gap: 12px; align-items: flex-end;
+}
+.stat-pill {
+  display: flex; flex-direction: column; align-items: center;
+  background: var(--dark-3); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 16px 24px; min-width: 110px;
+}
+.stat-pill .num {
+  font-family: var(--font-display); font-weight: 900; font-size: 2rem;
+  line-height: 1; letter-spacing: -0.02em;
+}
+.stat-pill .num.blue { color: var(--blue-light); }
+.stat-pill .num.red { color: var(--red); }
+.stat-pill .num.white { color: var(--white); }
+.stat-pill .label { font-size: 11px; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
+
+/* SECTION */
+.section {
+  max-width: 1100px; margin: 0 auto;
+  padding: 0 32px 80px;
+}
+.section-title {
+  font-family: var(--font-display); font-weight: 800; font-size: 1.5rem;
+  letter-spacing: -0.02em; color: var(--white); margin-bottom: 4px;
+}
+.section-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 32px; }
+
+/* CYCLE DE VIE */
+.lifecycle {
+  background: var(--dark-2); border: 1px solid var(--border);
+  border-radius: var(--radius-xl); padding: 28px 32px;
+  margin-bottom: 48px; overflow-x: auto;
+}
+.lifecycle-title { font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 20px; }
+.lifecycle-flow {
+  display: flex; align-items: center; gap: 0;
+  min-width: 500px;
+}
+.lf-node {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  flex: 1;
+}
+.lf-dot {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 700;
+}
+.lf-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-align: center; }
+.lf-arrow {
+  font-size: 18px; color: var(--text-faint); flex-shrink: 0; padding: 0 4px; margin-bottom: 22px;
+}
+.lf-dot.creation { background: var(--dark-4); border: 2px solid var(--border); color: var(--text-muted); }
+.lf-dot.scheduled { background: rgba(8,45,170,0.2); border: 2px solid var(--blue); color: var(--blue-light); }
+.lf-dot.live { background: rgba(247,4,29,0.15); border: 2px solid var(--red); color: var(--red); }
+.lf-dot.finished { background: rgba(26,110,60,0.2); border: 2px solid #1a6e3c; color: #3da869; }
+.lf-dot.postponed { background: rgba(160,112,0,0.2); border: 2px solid #a07000; color: #f0b429; }
+
+/* PARCOURS NAV */
+.parcours-nav {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px;
+}
+.pnav-btn {
+  display: flex; align-items: center; gap: 7px;
+  background: var(--dark-3); border: 1px solid var(--border);
+  border-radius: 40px; padding: 7px 14px;
+  font-size: 13px; font-weight: 600; color: var(--text-muted);
+  cursor: pointer; text-decoration: none;
+  transition: all var(--transition);
+}
+.pnav-btn:hover { background: var(--dark-4); color: var(--text); border-color: rgba(255,255,255,0.15); }
+.pnav-btn.active { background: var(--blue-dim); border-color: var(--blue); color: var(--blue-light); }
+.pnav-btn .p-icon { font-size: 15px; }
+
+/* PARCOURS BLOCK */
+.parcours-block { margin-bottom: 56px; }
+.parcours-header {
+  display: flex; align-items: flex-start; gap: 16px; margin-bottom: 20px;
+  padding: 20px 24px;
+  background: var(--dark-2); border: 1px solid var(--border);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border-bottom: none;
+}
+.parcours-icon {
+  width: 44px; height: 44px; border-radius: var(--radius-md);
+  background: var(--blue-dim); border: 1px solid rgba(8,45,170,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.parcours-header-text { flex: 1; }
+.parcours-num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--blue-light); margin-bottom: 3px; }
+.parcours-nom { font-family: var(--font-display); font-weight: 800; font-size: 1.15rem;
+  letter-spacing: -0.01em; color: var(--white); }
+.parcours-desc { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+.parcours-counts { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+.count-badge {
+  font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px;
+}
+.count-exist { background: rgba(247, 148, 29,0.2); color: #F7941D; border: 1px solid rgba(26,110,60,0.3); }
+.count-todo { background: var(--blue-dim); color: var(--blue-light); border: 1px solid rgba(8,45,170,0.3); }
+
+/* TABLE */
+.ecrans-table { width: 100%; border-collapse: collapse;
+  background: var(--dark-2); border: 1px solid var(--border);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  overflow: hidden;
+}
+.ecrans-table thead tr {
+  background: var(--dark-3); border-bottom: 1px solid var(--border);
+}
+.ecrans-table th {
+  padding: 10px 16px; text-align: left; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint);
+}
+.ecrans-table td {
+  padding: 13px 16px; border-bottom: 1px solid var(--border);
+  font-size: 13px; vertical-align: top;
+}
+.ecrans-table tr:last-child td { border-bottom: none; }
+.ecrans-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+.ecran-num { font-family: "Courier New", monospace; font-size: 11px;
+  color: var(--text-faint); font-weight: 600; white-space: nowrap; }
+.ecran-nom { font-weight: 600; color: var(--text); }
+.ecran-contenu { color: var(--text-muted); font-size: 12.5px; }
+.ecran-action { color: var(--text); font-size: 12px; font-weight: 500; white-space: nowrap; }
+
+.badge-exist {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(26,110,60,0.15); color: #3da869;
+  border: 1px solid rgba(26,110,60,0.25); border-radius: 20px;
+  font-size: 10px; font-weight: 700; padding: 3px 8px;
+  text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+}
+.badge-todo {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--blue-dim); color: var(--blue-light);
+  border: 1px solid rgba(8,45,170,0.25); border-radius: 20px;
+  font-size: 10px; font-weight: 700; padding: 3px 8px;
+  text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+}
+.badge-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.badge-exist .badge-dot { background: #3da869; }
+.badge-todo .badge-dot { background: var(--blue-light); }
+
+/* SPRINTS */
+.sprints-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.sprint-card {
+  background: var(--dark-2); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color var(--transition);
+}
+.sprint-card:hover { border-color: rgba(255,255,255,0.14); }
+.sprint-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.sprint-num {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 900; font-size: 13px;
+  flex-shrink: 0;
+}
+.sprint-title { font-family: var(--font-display); font-weight: 700; font-size: 14px;
+  color: var(--white); letter-spacing: -0.01em; }
+.sprint-items { display: flex; flex-wrap: wrap; gap: 6px; }
+.sprint-item {
+  background: var(--dark-3); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 4px 9px;
+  font-family: "Courier New", monospace; font-size: 11px; color: var(--text-muted);
+}
+
+/* STATUS SECTION */
+.status-overview {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 48px;
+}
+.status-card {
+  background: var(--dark-2); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+}
+.status-card .s-num { font-family: var(--font-display); font-weight: 900; font-size: 2.2rem;
+  line-height: 1; letter-spacing: -0.02em; }
+.status-card .s-label { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+.status-card .s-bar { height: 3px; border-radius: 2px; margin-top: 14px; }
+
+/* DIVIDER */
+.divider { border: none; border-top: 1px solid var(--border); margin: 0 0 48px; }
+
+/* FOOTER */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 32px; max-width: 1100px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-left { font-size: 12px; color: var(--text-faint); }
+.footer-right { display: flex; gap: 8px; }
+.footer-tag {
+  font-size: 11px; font-weight: 600; padding: 4px 10px;
+  border-radius: 20px; background: var(--dark-3); color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .hero { padding: 60px 24px 40px; }
+  .section { padding: 0 24px 60px; }
+  .header { padding: 0 24px; }
+  .lifecycle { padding: 24px; }
+}
+
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; gap: 28px; padding: 40px 16px 32px; }
+  .hero h1 { font-size: clamp(1.8rem, 3vw, 2.5rem); }
+  .hero-desc { font-size: 14px; max-width: 100%; }
+  .hero-stats { 
+    flex-direction: row; 
+    gap: 8px;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+  }
+  .stat-pill { 
+    min-width: auto; 
+    padding: 12px 16px;
+    flex: 1;
+  }
+  .stat-pill .num { font-size: 1.4rem; }
+  .stat-pill .label { font-size: 10px; }
+  
+  .section { padding: 0 16px 48px; }
+  .section-title { font-size: 1.3rem; margin-bottom: 8px; }
+  .section-sub { font-size: 12px; margin-bottom: 20px; }
+  
+  .header { 
+    padding: 0 16px;
+    height: 56px;
+  }
+  .header-logo { font-size: 16px; }
+  .header-badge { font-size: 10px; padding: 3px 8px; }
+  
+  .sprints-grid { grid-template-columns: 1fr; gap: 12px; }
+  .sprint-card { padding: 16px 18px; }
+  .sprint-title { font-size: 13px; }
+  
+  .status-overview { 
+    grid-template-columns: 1fr; 
+    gap: 12px; 
+    margin-bottom: 32px;
+  }
+  .status-card { padding: 16px 18px; }
+  .status-card .s-num { font-size: 1.8rem; }
+  .status-card .s-label { font-size: 11px; }
+  
+  .lifecycle { 
+    padding: 16px; 
+    margin-bottom: 32px;
+  }
+  .lifecycle-flow { 
+    min-width: 100%;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  .lf-node { gap: 4px; }
+  .lf-dot { width: 38px; height: 38px; font-size: 16px; }
+  .lf-label { font-size: 10px; }
+  .lf-arrow { font-size: 14px; padding: 0 2px; }
+  
+  .parcours-nav { gap: 6px; margin-bottom: 24px; }
+  .pnav-btn { font-size: 12px; padding: 6px 12px; gap: 5px; }
+  
+  .parcours-block { margin-bottom: 32px; }
+  .parcours-header { 
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+  }
+  .parcours-icon { width: 38px; height: 38px; font-size: 18px; }
+  .parcours-nom { font-size: 1rem; }
+  .parcours-counts { 
+    flex-direction: column; 
+    gap: 6px;
+    width: 100%;
+    align-items: flex-start;
+  }
+  .count-badge { font-size: 10px; padding: 3px 8px; }
+  
+  .ecrans-table { font-size: 13px; }
+  .ecrans-table thead tr { background: var(--dark-4); }
+  .ecrans-table th { 
+    padding: 8px 10px; 
+    font-size: 10px;
+  }
+  .ecrans-table td { 
+    padding: 10px 10px;
+    font-size: 12px;
+  }
+  .ecran-num { font-size: 10px; }
+  .ecran-nom { font-size: 13px; }
+  .ecran-contenu { font-size: 11px; }
+  .ecran-action { font-size: 11px; }
+  .ecrans-table th:nth-child(3), .ecrans-table td:nth-child(3) { display: none; }
+  .ecrans-table th:nth-child(4), .ecrans-table td:nth-child(4) { display: none; }
+  
+  .divider { margin: 0 0 32px; }
+  
+  footer { 
+    padding: 16px;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+  .footer-left { font-size: 11px; }
+  .footer-tag { font-size: 10px; padding: 3px 8px; }
+}
+
+@media (max-width: 480px) {
+  body { font-size: 14px; }
+  
+  .hero { 
+    gap: 20px; 
+    padding: 32px 12px 24px;
+  }
+  .hero h1 { font-size: clamp(1.6rem, 2.5vw, 2rem); line-height: 1.1; }
+  .hero-eyebrow { margin-bottom: 12px; font-size: 10px; }
+  .hero-desc { font-size: 13px; line-height: 1.5; }
+  .hero-stats { 
+    gap: 6px;
+    width: 100%;
+  }
+  .stat-pill { 
+    padding: 10px 12px;
+    border-radius: var(--radius-md);
+  }
+  .stat-pill .num { font-size: 1.2rem; }
+  .stat-pill .label { font-size: 9px; }
+  
+  .section { padding: 0 12px 36px; }
+  .section-title { font-size: 1.1rem; margin-bottom: 6px; }
+  .section-sub { font-size: 11px; margin-bottom: 16px; }
+  
+  .header { 
+    padding: 0 12px;
+    height: 52px;
+  }
+  .header-logo { 
+    font-size: 14px; 
+    gap: 6px;
+  }
+  .header-badge { 
+    font-size: 9px; 
+    padding: 2px 6px;
+  }
+  
+  .lifecycle {
+    padding: 12px;
+    margin-bottom: 24px;
+  }
+  .lifecycle-title { margin-bottom: 12px; }
+  .lifecycle-flow { padding-bottom: 4px; }
+  .lf-node { gap: 2px; }
+  .lf-dot { 
+    width: 32px; 
+    height: 32px; 
+    font-size: 13px;
+  }
+  .lf-label { font-size: 9px; }
+  .lf-arrow { 
+    font-size: 12px; 
+    padding: 0 1px;
+    margin-bottom: 16px;
+  }
+  
+  .parcours-nav { 
+    gap: 4px; 
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .pnav-btn { 
+    font-size: 11px; 
+    padding: 5px 10px; 
+    gap: 4px;
+  }
+  .p-icon { font-size: 12px; }
+  
+  .parcours-block { margin-bottom: 24px; }
+  .parcours-header { 
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+  }
+  .parcours-header-text { width: 100%; }
+  .parcours-icon { 
+    width: 32px; 
+    height: 32px; 
+    font-size: 16px;
+  }
+  .parcours-num { font-size: 10px; margin-bottom: 2px; }
+  .parcours-nom { font-size: 0.95rem; }
+  .parcours-desc { font-size: 12px; margin-top: 2px; }
+  .parcours-counts { 
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+  }
+  .count-badge { 
+    font-size: 9px; 
+    padding: 2px 6px;
+    width: 100%;
+    text-align: left;
+  }
+  
+  .ecrans-table { 
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    font-size: 12px;
+  }
+  .ecrans-table th { 
+    padding: 6px 8px;
+    font-size: 9px;
+  }
+  .ecrans-table td { 
+    padding: 8px 8px;
+    font-size: 11px;
+  }
+  .ecran-num { font-size: 9px; }
+  .ecran-nom { font-size: 12px; font-weight: 600; }
+  .ecran-contenu { 
+    font-size: 10px;
+    line-height: 1.3;
+  }
+  .ecran-action { font-size: 10px; }
+  .badge-exist, .badge-todo {
+    font-size: 9px;
+    padding: 2px 6px;
+  }
+  
+  .sprints-grid { gap: 10px; }
+  .sprint-card { 
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+  }
+  .sprint-header { gap: 8px; margin-bottom: 10px; }
+  .sprint-num { 
+    width: 28px; 
+    height: 28px; 
+    font-size: 11px;
+  }
+  .sprint-title { font-size: 12px; }
+  .sprint-items { gap: 4px; }
+  .sprint-item { 
+    font-size: 10px; 
+    padding: 3px 6px;
+  }
+  
+  .status-overview { 
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .status-card { 
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+  }
+  .status-card .s-num { 
+    font-size: 1.6rem; 
+    line-height: 1.2;
+  }
+  .status-card .s-label { 
+    font-size: 10px; 
+    margin-top: 4px;
+    line-height: 1.2;
+  }
+  .status-card .s-bar { 
+    height: 2px; 
+    margin-top: 8px;
+  }
+  
+  .divider { margin: 0 0 24px; }
+  
+  footer { 
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+    text-align: center;
+  }
+  .footer-left { 
+    font-size: 10px;
+    order: 2;
+  }
+  .footer-right {
+    flex-direction: column;
+    gap: 6px;
+    order: 1;
+    width: 100%;
+  }
+  .footer-tag { 
+    font-size: 9px; 
+    padding: 2px 6px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="header-logo" href="#"><img src="BM.png" alt="" width="100"></a>
+  <span class="header-badge">Parcours UX · v1.0</span>
+</header>
+
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">Document de conception</div>
+    <h1>Parcours <em>utilisateurs</em><br>complets</h1>
+    <p class="hero-desc">Architecture UX complète de Big Match — de l'onboarding aux settings, intégrant les écrans existants et les écrans à concevoir.</p>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-pill">
+      <span class="num white">50</span>
+      <span class="label">Écrans total</span>
+    </div>
+    <div class="stat-pill">
+      <span class="num blue">14</span>
+      <span class="label">Existants ✅</span>
+    </div>
+    <div class="stat-pill">
+      <span class="num red">36</span>
+      <span class="label">À concevoir</span>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+
+  <!-- CYCLE DE VIE -->
+  <p class="section-title">Cycle de vie d'un match</p>
+  <p class="section-sub">Un match passe par 4 états. Match Details est un seul composant avec 4 variants dans Figma.</p>
+  <div class="lifecycle">
+    <div class="lifecycle-title">Statuts</div>
+    <div class="lifecycle-flow">
+      <div class="lf-node">
+        <div class="lf-dot creation">＋</div>
+        <div class="lf-label">Création</div>
+      </div>
+      <div class="lf-arrow">→</div>
+      <div class="lf-node">
+        <div class="lf-dot scheduled">📅</div>
+        <div class="lf-label">Scheduled</div>
+      </div>
+      <div class="lf-arrow">→</div>
+      <div class="lf-node">
+        <div class="lf-dot live">🔴</div>
+        <div class="lf-label">Live</div>
+      </div>
+      <div class="lf-arrow">→</div>
+      <div class="lf-node">
+        <div class="lf-dot finished">✓</div>
+        <div class="lf-label">Finished</div>
+      </div>
+      <div class="lf-arrow" style="opacity:.3">·</div>
+      <div class="lf-node" style="opacity:.7">
+        <div class="lf-dot postponed">⏸</div>
+        <div class="lf-label">Postponed</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <p class="section-title">Vue d'ensemble</p>
+  <p class="section-sub">Répartition des 50 écrans par statut de conception.</p>
+  <div class="status-overview" style="margin-bottom:48px">
+    <div class="status-card">
+      <div class="s-num" style="color:#3da869">14</div>
+      <div class="s-label">Écrans existants dans le Figma</div>
+      <div class="s-bar" style="background:#3da869;width:28%"></div>
+    </div>
+    <div class="status-card">
+      <div class="s-num" style="color:var(--blue-light)">36</div>
+      <div class="s-label">Écrans à concevoir</div>
+      <div class="s-bar" style="background:var(--blue-light);width:72%"></div>
+    </div>
+    <div class="status-card">
+      <div class="s-num" style="color:var(--white)">7</div>
+      <div class="s-label">Parcours utilisateurs</div>
+      <div class="s-bar" style="background:var(--gray-mid);width:100%"></div>
+    </div>
+  </div>
+
+  <p class="section-title">Parcours détaillés</p>
+  <p class="section-sub">Chaque écran est listé avec son statut, son contenu clé et son action principale.</p>
+
+  <div class="parcours-block" id="p1">
+    <div class="parcours-header">
+      <div class="parcours-icon">🚀</div>
+      <div class="parcours-header-text">
+        <div class="parcours-num">Parcours 1</div>
+        <div class="parcours-nom">Onboarding & Accès</div>
+        <div class="parcours-desc">Faire entrer l'utilisateur rapidement et créer un profil minimal.</div>
+      </div>
+      <div class="parcours-counts">
+        <span class="count-badge count-exist">✅ 5 existants</span>
+        <span class="count-badge count-todo">🔲 1 à concevoir</span>
+      </div>
+    </div>
+    <table class="ecrans-table">
+      <thead>
+        <tr>
+          <th>N°</th>
+          <th>Écran</th>
+          <th>Statut</th>
+          <th>Contenu clé</th>
+          <th>Action principale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="ecran-num">1.1</span></td>
+          <td><span class="ecran-nom">Splash</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Logo Big Match, baseline « Organize. Play. Win. »</span></td>
+          <td><span class="ecran-action">Chargement automatique</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">1.2</span></td>
+          <td><span class="ecran-nom">Onboarding slide 1</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Illustration + accroche principale</span></td>
+          <td><span class="ecran-action">Swipe suivant</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">1.3</span></td>
+          <td><span class="ecran-nom">Onboarding slide 2</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Fonctionnalité clé mise en avant</span></td>
+          <td><span class="ecran-action">Swipe suivant</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">1.4</span></td>
+          <td><span class="ecran-nom">Login</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Email + Mot de passe, connexion sociale (Apple, Google, Facebook)</span></td>
+          <td><span class="ecran-action">Se connecter</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">1.5</span></td>
+          <td><span class="ecran-nom">Sign In</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Email, mot de passe, confirmation</span></td>
+          <td><span class="ecran-action">Créer un compte</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">1.6</span></td>
+          <td><span class="ecran-nom">Création profil initial</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Photo, nom, ville, sport favori (obligatoire : Nom + Sport)</span></td>
+          <td><span class="ecran-action">Continuer →</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="parcours-block" id="p2">
+    <div class="parcours-header">
+      <div class="parcours-icon">🏠</div>
+      <div class="parcours-header-text">
+        <div class="parcours-num">Parcours 2</div>
+        <div class="parcours-nom">Home</div>
+        <div class="parcours-desc">Aperçu immédiat de l'activité sportive — deux vues tabulées Match / Event.</div>
+      </div>
+      <div class="parcours-counts">
+        <span class="count-badge count-exist">✅ 2 existants</span>
+        <span class="count-badge count-todo">🔲 2 à concevoir</span>
+      </div>
+    </div>
+    <table class="ecrans-table">
+      <thead>
+        <tr>
+          <th>N°</th>
+          <th>Écran</th>
+          <th>Statut</th>
+          <th>Contenu clé</th>
+          <th>Action principale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="ecran-num">2.1</span></td>
+          <td><span class="ecran-nom">Home — Match</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Liste des matchs avec badges de statut, score si live</span></td>
+          <td><span class="ecran-action">Tap → Match Details</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">2.2</span></td>
+          <td><span class="ecran-nom">Home — Event</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Liste des compétitions / tournois avec état</span></td>
+          <td><span class="ecran-action">Tap → Event</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">2.3</span></td>
+          <td><span class="ecran-nom">Empty State — Match</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Illustration + « Aucun match créé »</span></td>
+          <td><span class="ecran-action">CTA Créer un match</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">2.4</span></td>
+          <td><span class="ecran-nom">Empty State — Event</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Illustration + « Aucun événement »</span></td>
+          <td><span class="ecran-action">CTA Créer un événement</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="parcours-block" id="p3">
+    <div class="parcours-header">
+      <div class="parcours-icon">⚽</div>
+      <div class="parcours-header-text">
+        <div class="parcours-num">Parcours 3</div>
+        <div class="parcours-nom">Match Details</div>
+        <div class="parcours-desc">Un seul composant, 4 états distincts selon le statut du match.</div>
+      </div>
+      <div class="parcours-counts">
+        <span class="count-badge count-exist">✅ 1 existants</span>
+        <span class="count-badge count-todo">🔲 8 à concevoir</span>
+      </div>
+    </div>
+    <table class="ecrans-table">
+      <thead>
+        <tr>
+          <th>N°</th>
+          <th>Écran</th>
+          <th>Statut</th>
+          <th>Contenu clé</th>
+          <th>Action principale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="ecran-num">3.1</span></td>
+          <td><span class="ecran-nom">Match Details — Scheduled</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Équipes, date, heure, lieu — score masqué (-- : --)</span></td>
+          <td><span class="ecran-action">Démarrer / Modifier / Reporter</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">3.2</span></td>
+          <td><span class="ecran-nom">Match Details — Live</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Score en direct, timer, équipes</span></td>
+          <td><span class="ecran-action">Mettre à jour le score</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">3.3</span></td>
+          <td><span class="ecran-nom">Match Details — Finished</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Score final, résumé, accès stats</span></td>
+          <td><span class="ecran-action">Voir les stats</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">3.4</span></td>
+          <td><span class="ecran-nom">Match Details — Postponed</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Badge « Reporté », nouvelle date si connue</span></td>
+          <td><span class="ecran-action">Reprogrammer</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">3.5</span></td>
+          <td><span class="ecran-nom">Match Details — Feuille</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Liste des joueurs, compositions des équipes</span></td>
+          <td><span class="ecran-action">Consultation</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">3.6</span></td>
+          <td><span class="ecran-nom">Overlay — Saisir le score</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Boutons +/− rapides pour chaque équipe</span></td>
+          <td><span class="ecran-action">Enregistrer</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">3.7</span></td>
+          <td><span class="ecran-nom">Modifier le match</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Formulaire pré-rempli et éditable</span></td>
+          <td><span class="ecran-action">Enregistrer les modifications</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">3.8</span></td>
+          <td><span class="ecran-nom">Confirmation fin de match</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Score récap, modale de confirmation</span></td>
+          <td><span class="ecran-action">Confirmer / Annuler</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">3.9</span></td>
+          <td><span class="ecran-nom">Gestion des équipes</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Répartition des joueurs en 2 équipes</span></td>
+          <td><span class="ecran-action">Valider les équipes</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="parcours-block" id="p4">
+    <div class="parcours-header">
+      <div class="parcours-icon">➕</div>
+      <div class="parcours-header-text">
+        <div class="parcours-num">Parcours 4</div>
+        <div class="parcours-nom">Créer un match</div>
+        <div class="parcours-desc">Parcours prioritaire — créer un match structuré en moins de 2 minutes.</div>
+      </div>
+      <div class="parcours-counts">
+        <span class="count-badge count-exist">✅ 0 existants</span>
+        <span class="count-badge count-todo">🔲 6 à concevoir</span>
+      </div>
+    </div>
+    <table class="ecrans-table">
+      <thead>
+        <tr>
+          <th>N°</th>
+          <th>Écran</th>
+          <th>Statut</th>
+          <th>Contenu clé</th>
+          <th>Action principale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="ecran-num">4.1</span></td>
+          <td><span class="ecran-nom">Choix du type</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Match ou Événement / Tournoi</span></td>
+          <td><span class="ecran-action">Sélectionner</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">4.2</span></td>
+          <td><span class="ecran-nom">Choix du sport</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Grid d'icônes — Football, Basket, Volley, Tennis…</span></td>
+          <td><span class="ecran-action">Sélectionner le sport</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">4.3</span></td>
+          <td><span class="ecran-nom">Infos essentielles (étape 1/3)</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Titre (facultatif), Date, Heure, Lieu</span></td>
+          <td><span class="ecran-action">Suivant</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">4.4</span></td>
+          <td><span class="ecran-nom">Format & règles (étape 2/3)</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Nombre de joueurs, durée, format score</span></td>
+          <td><span class="ecran-action">Suivant</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">4.5</span></td>
+          <td><span class="ecran-nom">Récapitulatif (étape 3/3)</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Synthèse de toutes les infos saisies</span></td>
+          <td><span class="ecran-action">Publier le match</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">4.6</span></td>
+          <td><span class="ecran-nom">Succès — Publication</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Confirmation visuelle animée</span></td>
+          <td><span class="ecran-action">Gérer le match / Partager</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="parcours-block" id="p5">
+    <div class="parcours-header">
+      <div class="parcours-icon">🏆</div>
+      <div class="parcours-header-text">
+        <div class="parcours-num">Parcours 5</div>
+        <div class="parcours-nom">Events & Tournois</div>
+        <div class="parcours-desc">Créer et gérer une compétition structurée — poules, élimination, ligue.</div>
+      </div>
+      <div class="parcours-counts">
+        <span class="count-badge count-exist">✅ 6 existants</span>
+        <span class="count-badge count-todo">🔲 7 à concevoir</span>
+      </div>
+    </div>
+    <table class="ecrans-table">
+      <thead>
+        <tr>
+          <th>N°</th>
+          <th>Écran</th>
+          <th>Statut</th>
+          <th>Contenu clé</th>
+          <th>Action principale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="ecran-num">5.1</span></td>
+          <td><span class="ecran-nom">Créer — Infos compétition</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Nom, sport, dates (début/fin), lieu</span></td>
+          <td><span class="ecran-action">Suivant</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">5.2</span></td>
+          <td><span class="ecran-nom">Créer — Format du tournoi</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Poules, Élimination directe, Ligue</span></td>
+          <td><span class="ecran-action">Suivant</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">5.3</span></td>
+          <td><span class="ecran-nom">Créer — Configuration équipes</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Nombre d'équipes, noms</span></td>
+          <td><span class="ecran-action">Suivant</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">5.4</span></td>
+          <td><span class="ecran-nom">Créer — Récapitulatif</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Synthèse avant publication</span></td>
+          <td><span class="ecran-action">Publier l'événement</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">5.5</span></td>
+          <td><span class="ecran-nom">Succès — Publication</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Confirmation + accès dashboard</span></td>
+          <td><span class="ecran-action">Gérer l'événement</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">5.6</span></td>
+          <td><span class="ecran-nom">Event — Vue principale</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Header compétition, navigation onglets</span></td>
+          <td><span class="ecran-action">Navigation</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">5.7</span></td>
+          <td><span class="ecran-nom">Event Standing</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Classement des équipes</span></td>
+          <td><span class="ecran-action">Consultation</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">5.8</span></td>
+          <td><span class="ecran-nom">Event Stats — Joueurs</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Statistiques individuelles</span></td>
+          <td><span class="ecran-action">Consultation</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">5.9</span></td>
+          <td><span class="ecran-nom">Event Stats — Équipes</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Statistiques par équipe</span></td>
+          <td><span class="ecran-action">Consultation</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">5.10</span></td>
+          <td><span class="ecran-nom">Event Details</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Informations de la compétition</span></td>
+          <td><span class="ecran-action">Consultation</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">5.11</span></td>
+          <td><span class="ecran-nom">Event Live Match</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Match en cours dans le tournoi</span></td>
+          <td><span class="ecran-action">Suivi live</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">5.12</span></td>
+          <td><span class="ecran-nom">Bracket / Tableau</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Visualisation des phases — arbre d'élimination</span></td>
+          <td><span class="ecran-action">Consultation</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">5.13</span></td>
+          <td><span class="ecran-nom">Podium Tournoi</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Résultat final de la compétition</span></td>
+          <td><span class="ecran-action">Partager</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="parcours-block" id="p6">
+    <div class="parcours-header">
+      <div class="parcours-icon">👤</div>
+      <div class="parcours-header-text">
+        <div class="parcours-num">Parcours 6</div>
+        <div class="parcours-nom">Profil</div>
+        <div class="parcours-desc">Identité sportive de l'utilisateur — activité, résultats, statistiques.</div>
+      </div>
+      <div class="parcours-counts">
+        <span class="count-badge count-exist">✅ 0 existants</span>
+        <span class="count-badge count-todo">🔲 4 à concevoir</span>
+      </div>
+    </div>
+    <table class="ecrans-table">
+      <thead>
+        <tr>
+          <th>N°</th>
+          <th>Écran</th>
+          <th>Statut</th>
+          <th>Contenu clé</th>
+          <th>Action principale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="ecran-num">6.1</span></td>
+          <td><span class="ecran-nom">Profil — Vue principale</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Photo, nom, ville, sport, stats clés, matchs récents, tournois actifs</span></td>
+          <td><span class="ecran-action">Modifier le profil</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">6.2</span></td>
+          <td><span class="ecran-nom">Profil — Édition</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Photo, nom, ville, sport(s), bio courte</span></td>
+          <td><span class="ecran-action">Enregistrer</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">6.3</span></td>
+          <td><span class="ecran-nom">Mes Stats</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Matchs organisés, tournois créés, victoires, historique</span></td>
+          <td><span class="ecran-action">Consultation</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">6.4</span></td>
+          <td><span class="ecran-nom">Historique matchs</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Liste chronologique avec statuts et scores</span></td>
+          <td><span class="ecran-action">Tap → Match Details Finished</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="parcours-block" id="p7">
+    <div class="parcours-header">
+      <div class="parcours-icon">⚙️</div>
+      <div class="parcours-header-text">
+        <div class="parcours-num">Parcours 7</div>
+        <div class="parcours-nom">Settings</div>
+        <div class="parcours-desc">Gestion du compte, préférences, notifications et support.</div>
+      </div>
+      <div class="parcours-counts">
+        <span class="count-badge count-exist">✅ 0 existants</span>
+        <span class="count-badge count-todo">🔲 8 à concevoir</span>
+      </div>
+    </div>
+    <table class="ecrans-table">
+      <thead>
+        <tr>
+          <th>N°</th>
+          <th>Écran</th>
+          <th>Statut</th>
+          <th>Contenu clé</th>
+          <th>Action principale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="ecran-num">7.1</span></td>
+          <td><span class="ecran-nom">Settings — Principal</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Menu groupé : Compte, Expérience, Sécurité, Support, Légal</span></td>
+          <td><span class="ecran-action">Navigation</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">7.2</span></td>
+          <td><span class="ecran-nom">Mon compte</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Nom, email, téléphone, mot de passe, supprimer le compte</span></td>
+          <td><span class="ecran-action">Modifier</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">7.3</span></td>
+          <td><span class="ecran-nom">Notifications</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Rappels avant match, début live, résultats, tournois</span></td>
+          <td><span class="ecran-action">Toggles on/off</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">7.4</span></td>
+          <td><span class="ecran-nom">Préférences</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Langue, thème clair/sombre, format heure, sport par défaut</span></td>
+          <td><span class="ecran-action">Sélectionner</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">7.5</span></td>
+          <td><span class="ecran-nom">Confidentialité</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Visibilité du profil, gestion des données</span></td>
+          <td><span class="ecran-action">Configurer</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">7.6</span></td>
+          <td><span class="ecran-nom">Aide & support</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">FAQ, Nous contacter, Signaler un problème</span></td>
+          <td><span class="ecran-action">Navigation</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">7.7</span></td>
+          <td><span class="ecran-nom">À propos</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Version de l'app, CGU, Politique de confidentialité</span></td>
+          <td><span class="ecran-action">Consultation</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">7.8</span></td>
+          <td><span class="ecran-nom">Déconnexion</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Modale de confirmation</span></td>
+          <td><span class="ecran-action">Confirmer / Annuler</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider">
+  <p class="section-title">Plan de conception — 5 Sprints</p>
+  <p class="section-sub">Ordre recommandé pour concevoir les écrans dans Figma, du plus critique au plus secondaire.</p>
+  <div class="sprints-grid">
+    <div class="sprint-card">
+      <div class="sprint-header">
+        <div class="sprint-num" style="background:#082DAA22;color:#082DAA;border:1.5px solid #082DAA44">1</div>
+        <div class="sprint-title">Créer un match</div>
+      </div>
+      <div class="sprint-items"><span class="sprint-item">4.1</span><span class="sprint-item">4.2</span><span class="sprint-item">4.3</span><span class="sprint-item">4.4</span><span class="sprint-item">4.5</span><span class="sprint-item">4.6</span></div>
+    </div>
+    <div class="sprint-card">
+      <div class="sprint-header">
+        <div class="sprint-num" style="background:#F7041D22;color:#F7041D;border:1.5px solid #F7041D44">2</div>
+        <div class="sprint-title">Cycle de vie du match</div>
+      </div>
+      <div class="sprint-items"><span class="sprint-item">3.1</span><span class="sprint-item">3.2</span><span class="sprint-item">3.3</span><span class="sprint-item">3.4</span><span class="sprint-item">3.6</span><span class="sprint-item">3.8</span><span class="sprint-item">3.9</span></div>
+    </div>
+    <div class="sprint-card">
+      <div class="sprint-header">
+        <div class="sprint-num" style="background:#1a6e3c22;color:#1a6e3c;border:1.5px solid #1a6e3c44">3</div>
+        <div class="sprint-title">Profil & Settings</div>
+      </div>
+      <div class="sprint-items"><span class="sprint-item">6.1</span><span class="sprint-item">6.2</span><span class="sprint-item">6.3</span><span class="sprint-item">7.1</span><span class="sprint-item">7.2</span><span class="sprint-item">7.3</span><span class="sprint-item">7.4</span><span class="sprint-item">7.8</span></div>
+    </div>
+    <div class="sprint-card">
+      <div class="sprint-header">
+        <div class="sprint-num" style="background:#a0700022;color:#a07000;border:1.5px solid #a0700044">4</div>
+        <div class="sprint-title">Tournois & Compétitions</div>
+      </div>
+      <div class="sprint-items"><span class="sprint-item">5.1</span><span class="sprint-item">5.2</span><span class="sprint-item">5.3</span><span class="sprint-item">5.4</span><span class="sprint-item">5.5</span><span class="sprint-item">5.12</span><span class="sprint-item">5.13</span></div>
+    </div>
+    <div class="sprint-card">
+      <div class="sprint-header">
+        <div class="sprint-num" style="background:#55555522;color:#555555;border:1.5px solid #55555544">5</div>
+        <div class="sprint-title">Finitions & Empty states</div>
+      </div>
+      <div class="sprint-items"><span class="sprint-item">1.6</span><span class="sprint-item">2.3</span><span class="sprint-item">2.4</span><span class="sprint-item">3.7</span><span class="sprint-item">6.4</span><span class="sprint-item">7.5</span><span class="sprint-item">7.6</span><span class="sprint-item">7.7</span></div>
+    </div>
+  </div>
+
+</div>
+
+<footer style="border-top:1px solid var(--border);padding:24px 32px;display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:0 auto;">
+  <span style="font-size:12px;color:var(--text-faint)">Big Match UX · Document parcours v1.0 · Mai 2026</span>
+  <div style="display:flex;gap:8px">
+    <span style="font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;background:var(--dark-3);color:var(--text-muted);border:1px solid var(--border)">50 écrans</span>
+    <span style="font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;background:var(--dark-3);color:var(--text-muted);border:1px solid var(--border)">7 parcours</span>
+    <span style="font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;background:var(--dark-3);color:var(--text-muted);border:1px solid var(--border)">5 sprints</span>
+  </div>
+</footer>
+
+</body>
+</html>
