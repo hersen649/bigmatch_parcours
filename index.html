@@ -609,11 +609,11 @@ body {
       <span class="label">Écrans total</span>
     </div>
     <div class="stat-pill">
-      <span class="num blue">14</span>
+      <span class="num blue">24</span>
       <span class="label">Existants ✅</span>
     </div>
     <div class="stat-pill">
-      <span class="num red">36</span>
+      <span class="num red">26</span>
       <span class="label">À concevoir</span>
     </div>
   </div>
@@ -659,14 +659,14 @@ body {
   <p class="section-sub">Répartition des 50 écrans par statut de conception.</p>
   <div class="status-overview" style="margin-bottom:48px">
     <div class="status-card">
-      <div class="s-num" style="color:#3da869">14</div>
+      <div class="s-num" style="color:#3da869">24</div>
       <div class="s-label">Écrans existants dans le Figma</div>
-      <div class="s-bar" style="background:#3da869;width:28%"></div>
+      <div class="s-bar" style="background:#3da869;width:48%"></div>
     </div>
     <div class="status-card">
-      <div class="s-num" style="color:var(--blue-light)">36</div>
+      <div class="s-num" style="color:var(--blue-light)">26</div>
       <div class="s-label">Écrans à concevoir</div>
-      <div class="s-bar" style="background:var(--blue-light);width:72%"></div>
+      <div class="s-bar" style="background:var(--blue-light);width:52%"></div>
     </div>
     <div class="status-card">
       <div class="s-num" style="color:var(--white)">7</div>
@@ -813,8 +813,8 @@ body {
         <div class="parcours-desc">Un seul composant, 4 états distincts selon le statut du match.</div>
       </div>
       <div class="parcours-counts">
-        <span class="count-badge count-exist">✅ 1 existants</span>
-        <span class="count-badge count-todo">🔲 8 à concevoir</span>
+        <span class="count-badge count-exist">✅ 11 existants</span>
+        <span class="count-badge count-todo">🔲 0 à concevoir</span>
       </div>
     </div>
     <table class="ecrans-table">
@@ -831,28 +831,28 @@ body {
         <tr>
           <td><span class="ecran-num">3.1</span></td>
           <td><span class="ecran-nom">Match Details — Scheduled</span></td>
-          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
           <td><span class="ecran-contenu">Équipes, date, heure, lieu — score masqué (-- : --)</span></td>
           <td><span class="ecran-action">Démarrer / Modifier / Reporter</span></td>
         </tr>
         <tr>
           <td><span class="ecran-num">3.2</span></td>
           <td><span class="ecran-nom">Match Details — Live</span></td>
-          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
           <td><span class="ecran-contenu">Score en direct, timer, équipes</span></td>
           <td><span class="ecran-action">Mettre à jour le score</span></td>
         </tr>
         <tr>
           <td><span class="ecran-num">3.3</span></td>
           <td><span class="ecran-nom">Match Details — Finished</span></td>
-          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
           <td><span class="ecran-contenu">Score final, résumé, accès stats</span></td>
           <td><span class="ecran-action">Voir les stats</span></td>
         </tr>
         <tr>
           <td><span class="ecran-num">3.4</span></td>
           <td><span class="ecran-nom">Match Details — Postponed</span></td>
-          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
           <td><span class="ecran-contenu">Badge « Reporté », nouvelle date si connue</span></td>
           <td><span class="ecran-action">Reprogrammer</span></td>
         </tr>
@@ -865,31 +865,45 @@ body {
         </tr>
         <tr>
           <td><span class="ecran-num">3.6</span></td>
-          <td><span class="ecran-nom">Overlay — Saisir le score</span></td>
-          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
-          <td><span class="ecran-contenu">Boutons +/− rapides pour chaque équipe</span></td>
-          <td><span class="ecran-action">Enregistrer</span></td>
+          <td><span class="ecran-nom">Event — Vue principale</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Header compétition, navigation onglets</span></td>
+          <td><span class="ecran-action">Navigation</span></td>
         </tr>
         <tr>
           <td><span class="ecran-num">3.7</span></td>
-          <td><span class="ecran-nom">Modifier le match</span></td>
-          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
-          <td><span class="ecran-contenu">Formulaire pré-rempli et éditable</span></td>
-          <td><span class="ecran-action">Enregistrer les modifications</span></td>
+          <td><span class="ecran-nom">Event Standing</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Classement des équipes</span></td>
+          <td><span class="ecran-action">Consultation</span></td>
         </tr>
         <tr>
           <td><span class="ecran-num">3.8</span></td>
-          <td><span class="ecran-nom">Confirmation fin de match</span></td>
-          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
-          <td><span class="ecran-contenu">Score récap, modale de confirmation</span></td>
-          <td><span class="ecran-action">Confirmer / Annuler</span></td>
+          <td><span class="ecran-nom">Event Stats — Joueurs</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Statistiques individuelles</span></td>
+          <td><span class="ecran-action">Consultation</span></td>
         </tr>
         <tr>
           <td><span class="ecran-num">3.9</span></td>
-          <td><span class="ecran-nom">Gestion des équipes</span></td>
-          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
-          <td><span class="ecran-contenu">Répartition des joueurs en 2 équipes</span></td>
-          <td><span class="ecran-action">Valider les équipes</span></td>
+          <td><span class="ecran-nom">Event Stats — Équipes</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Statistiques par équipe</span></td>
+          <td><span class="ecran-action">Consultation</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">3.10</span></td>
+          <td><span class="ecran-nom">Event Details</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Informations de la compétition</span></td>
+          <td><span class="ecran-action">Consultation</span></td>
+        </tr>
+        <tr>
+          <td><span class="ecran-num">3.11</span></td>
+          <td><span class="ecran-nom">Event Live Match</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
+          <td><span class="ecran-contenu">Match en cours dans le tournoi</span></td>
+          <td><span class="ecran-action">Suivi live</span></td>
         </tr>
       </tbody>
     </table>
@@ -904,8 +918,8 @@ body {
         <div class="parcours-desc">Parcours prioritaire — créer un match structuré en moins de 2 minutes.</div>
       </div>
       <div class="parcours-counts">
-        <span class="count-badge count-exist">✅ 0 existants</span>
-        <span class="count-badge count-todo">🔲 6 à concevoir</span>
+        <span class="count-badge count-exist">✅ 6 existants</span>
+        <span class="count-badge count-todo">🔲 0 à concevoir</span>
       </div>
     </div>
     <table class="ecrans-table">
@@ -922,42 +936,42 @@ body {
         <tr>
           <td><span class="ecran-num">4.1</span></td>
           <td><span class="ecran-nom">Choix du type</span></td>
-          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
           <td><span class="ecran-contenu">Match ou Événement / Tournoi</span></td>
           <td><span class="ecran-action">Sélectionner</span></td>
         </tr>
         <tr>
           <td><span class="ecran-num">4.2</span></td>
           <td><span class="ecran-nom">Choix du sport</span></td>
-          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
           <td><span class="ecran-contenu">Grid d'icônes — Football, Basket, Volley, Tennis…</span></td>
           <td><span class="ecran-action">Sélectionner le sport</span></td>
         </tr>
         <tr>
           <td><span class="ecran-num">4.3</span></td>
           <td><span class="ecran-nom">Infos essentielles (étape 1/3)</span></td>
-          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
           <td><span class="ecran-contenu">Titre (facultatif), Date, Heure, Lieu</span></td>
           <td><span class="ecran-action">Suivant</span></td>
         </tr>
         <tr>
           <td><span class="ecran-num">4.4</span></td>
           <td><span class="ecran-nom">Format & règles (étape 2/3)</span></td>
-          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
           <td><span class="ecran-contenu">Nombre de joueurs, durée, format score</span></td>
           <td><span class="ecran-action">Suivant</span></td>
         </tr>
         <tr>
           <td><span class="ecran-num">4.5</span></td>
           <td><span class="ecran-nom">Récapitulatif (étape 3/3)</span></td>
-          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
           <td><span class="ecran-contenu">Synthèse de toutes les infos saisies</span></td>
           <td><span class="ecran-action">Publier le match</span></td>
         </tr>
         <tr>
           <td><span class="ecran-num">4.6</span></td>
           <td><span class="ecran-nom">Succès — Publication</span></td>
-          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
           <td><span class="ecran-contenu">Confirmation visuelle animée</span></td>
           <td><span class="ecran-action">Gérer le match / Partager</span></td>
         </tr>
@@ -974,8 +988,8 @@ body {
         <div class="parcours-desc">Créer et gérer une compétition structurée — poules, élimination, ligue.</div>
       </div>
       <div class="parcours-counts">
-        <span class="count-badge count-exist">✅ 6 existants</span>
-        <span class="count-badge count-todo">🔲 7 à concevoir</span>
+        <span class="count-badge count-exist">✅ 0 existants</span>
+        <span class="count-badge count-todo">🔲 11 à concevoir</span>
       </div>
     </div>
     <table class="ecrans-table">
@@ -1026,55 +1040,41 @@ body {
         </tr>
         <tr>
           <td><span class="ecran-num">5.6</span></td>
-          <td><span class="ecran-nom">Event — Vue principale</span></td>
-          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
-          <td><span class="ecran-contenu">Header compétition, navigation onglets</span></td>
-          <td><span class="ecran-action">Navigation</span></td>
+          <td><span class="ecran-nom">Overlay — Saisir le score</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Boutons +/− rapides pour chaque équipe</span></td>
+          <td><span class="ecran-action">Enregistrer</span></td>
         </tr>
         <tr>
           <td><span class="ecran-num">5.7</span></td>
-          <td><span class="ecran-nom">Event Standing</span></td>
-          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
-          <td><span class="ecran-contenu">Classement des équipes</span></td>
-          <td><span class="ecran-action">Consultation</span></td>
+          <td><span class="ecran-nom">Modifier le match</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Formulaire pré-rempli et éditable</span></td>
+          <td><span class="ecran-action">Enregistrer les modifications</span></td>
         </tr>
         <tr>
           <td><span class="ecran-num">5.8</span></td>
-          <td><span class="ecran-nom">Event Stats — Joueurs</span></td>
-          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
-          <td><span class="ecran-contenu">Statistiques individuelles</span></td>
-          <td><span class="ecran-action">Consultation</span></td>
+          <td><span class="ecran-nom">Confirmation fin de match</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Score récap, modale de confirmation</span></td>
+          <td><span class="ecran-action">Confirmer / Annuler</span></td>
         </tr>
         <tr>
           <td><span class="ecran-num">5.9</span></td>
-          <td><span class="ecran-nom">Event Stats — Équipes</span></td>
-          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
-          <td><span class="ecran-contenu">Statistiques par équipe</span></td>
-          <td><span class="ecran-action">Consultation</span></td>
+          <td><span class="ecran-nom">Gestion des équipes</span></td>
+          <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
+          <td><span class="ecran-contenu">Répartition des joueurs en 2 équipes</span></td>
+          <td><span class="ecran-action">Valider les équipes</span></td>
         </tr>
         <tr>
           <td><span class="ecran-num">5.10</span></td>
-          <td><span class="ecran-nom">Event Details</span></td>
-          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
-          <td><span class="ecran-contenu">Informations de la compétition</span></td>
-          <td><span class="ecran-action">Consultation</span></td>
-        </tr>
-        <tr>
-          <td><span class="ecran-num">5.11</span></td>
-          <td><span class="ecran-nom">Event Live Match</span></td>
-          <td><span class="badge-exist"><span class="badge-dot"></span>Existant</span></td>
-          <td><span class="ecran-contenu">Match en cours dans le tournoi</span></td>
-          <td><span class="ecran-action">Suivi live</span></td>
-        </tr>
-        <tr>
-          <td><span class="ecran-num">5.12</span></td>
           <td><span class="ecran-nom">Bracket / Tableau</span></td>
           <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
           <td><span class="ecran-contenu">Visualisation des phases — arbre d'élimination</span></td>
           <td><span class="ecran-action">Consultation</span></td>
         </tr>
         <tr>
-          <td><span class="ecran-num">5.13</span></td>
+          <td><span class="ecran-num">5.11</span></td>
           <td><span class="ecran-nom">Podium Tournoi</span></td>
           <td><span class="badge-todo"><span class="badge-dot"></span>À concevoir</span></td>
           <td><span class="ecran-contenu">Résultat final de la compétition</span></td>
